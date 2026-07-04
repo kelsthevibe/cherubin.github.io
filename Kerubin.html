@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelvin Akinbiola — ML × Embedded Systems</title>
+<meta name="description" content="Kelvin Akinbiola. Electrical & Computer Engineering + Mathematics at Wayne State. Machine learning that runs on real hardware.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0d0d;
+    --paper:#fbfaf7;
+    --paper-2:#f1efe9;
+    --stamp:#b3261e;
+    --hatch: repeating-linear-gradient(45deg, var(--ink) 0 1.5px, transparent 1.5px 6px);
+    --panel-shadow: 6px 6px 0 var(--ink);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none !important} }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--ink)}
+  a:focus-visible, button:focus-visible{outline:3px solid var(--stamp); outline-offset:3px}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+  /* ---------- header ---------- */
+  header{padding:18px 0;border-bottom:2px solid var(--ink)}
+  .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .tag{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+  nav a{margin-left:16px;font-family:'IBM Plex Mono',monospace;font-size:.85rem;text-decoration:none;border-bottom:2px solid transparent}
+  nav a:hover{border-bottom-color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 56px;position:relative}
+  .hero h1{
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(2.6rem,9vw,5.2rem);
+    line-height:.98;
+    letter-spacing:-.01em;
+    text-transform:uppercase;
+  }
+  .hero h1 .hatched{
+    background:var(--hatch);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero .sub{
+    margin-top:20px;
+    font-size:clamp(1rem,2.6vw,1.2rem);
+    max-width:34em;
+  }
+  .hero .thesis{
+    display:inline-block;
+    margin-top:26px;
+    padding:10px 16px;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    box-shadow:var(--panel-shadow);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.95rem;
+  }
+  .stamp{
+    position:absolute; right:0; top:64px;
+    width:64px;height:64px;
+    border:3px solid var(--stamp);
+    color:var(--stamp);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Archivo Black',sans-serif;font-size:1.4rem;
+    transform:rotate(6deg);
+    user-select:none;
+  }
+  @media(max-width:640px){ .stamp{display:none} }
+
+  /* ---------- panels ---------- */
+  section{padding:44px 0}
+  .panel-title{
+    font-family:'Archivo Black',sans-serif;
+    text-transform:uppercase;
+    font-size:1.15rem;
+    letter-spacing:.04em;
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:22px;
+  }
+  .panel-title::after{content:"";flex:1;height:8px;background:var(--hatch)}
+
+  .grid{display:grid;gap:18px}
+  @media(min-width:680px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} .grid.cols-2{grid-template-columns:repeat(2,1fr)} }
+
+  .card{
+    border:2px solid var(--ink);
+    background:var(--paper);
+    box-shadow:var(--panel-shadow);
+    padding:18px;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .card:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+  .card h3{font-family:'Archivo Black',sans-serif;font-size:1rem;text-transform:uppercase;margin-bottom:8px}
+  .card p{font-size:.92rem}
+  .status{
+    display:inline-block;margin-top:12px;
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+    border:1.5px solid var(--ink);padding:2px 8px;background:var(--paper-2);
+  }
+  .status.live{background:var(--ink);color:var(--paper)}
+
+  /* ---------- skills ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    font-family:'IBM Plex Mono',monospace;font-size:.85rem;
+    border:2px solid var(--ink);padding:6px 12px;background:var(--paper);
+  }
+  .chip.core{background:var(--ink);color:var(--paper)}
+
+  /* ---------- about ---------- */
+  .about p + p{margin-top:12px}
+  .about strong{font-weight:600}
+
+  /* ---------- contact ---------- */
+  .contact-row{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{
+    display:inline-block;text-decoration:none;
+    font-family:'IBM Plex Mono',monospace;font-size:.9rem;
+    border:2px solid var(--ink);padding:10px 18px;background:var(--paper);
+    box-shadow:4px 4px 0 var(--ink);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.primary{background:var(--ink);color:var(--paper)}
+
+  footer{border-top:2px solid var(--ink);padding:22px 0 40px;margin-top:30px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:.8rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <span class="mono tag">Detroit, MI — EST</span>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div class="stamp" aria-hidden="true">KA</div>
+    <h1>Kelvin<br><span class="hatched">Akinbiola</span></h1>
+    <p class="sub">Electrical &amp; Computer Engineering + Mathematics — Wayne State University. Interested in AI/ML, embedded systems, robotics, and quantum computing.</p>
+    <p class="thesis">I build machine learning that runs on real hardware.</p>
+  </div>
+
+  <section id="projects">
+    <h2 class="panel-title">Projects</h2>
+    <div class="grid cols-3">
+      <article class="card">
+        <h3>⚽ Football Match Predictor</h3>
+        <p>Match-outcome prediction on two decades of EPL data — Elo &amp; form feature engineering, XGBoost, deployed as a live Streamlit app.</p>
+        <span class="status">In progress · ships Aug 2026</span>
+      </article>
+      <article class="card">
+        <h3>🤖 TinyML Gesture Wand</h3>
+        <p>Real-time gesture recognition neural network running fully on-device on an Arduino Nano 33 BLE Sense (Cortex-M4, TFLite Micro).</p>
+        <span class="status">Queued · Aug–Sep 2026</span>
+      </article>
+      <article class="card">
+        <h3>🧠 GPT From Scratch</h3>
+        <p>Decoder-only transformer — attention, layernorm, residuals — implemented from first principles in PyTorch and trained end-to-end.</p>
+        <span class="status">Queued · Oct 2026</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="panel-title">Toolkit</h2>
+    <div class="chips">
+      <span class="chip core">Python</span>
+      <span class="chip core">C++</span>
+      <span class="chip core">Arduino</span>
+      <span class="chip">MATLAB</span>
+      <span class="chip">SQL</span>
+      <span class="chip">NumPy / pandas</span>
+      <span class="chip">scikit-learn</span>
+      <span class="chip">Circuit fundamentals</span>
+      <span class="chip">Calculus &amp; Linear Algebra</span>
+      <span class="chip">Data analysis</span>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2 class="panel-title">About</h2>
+    <p>I'm an ECE undergraduate with a parallel focus in mathematics (<strong>3.9 GPA</strong>), working toward AI/ML engineering and research. My angle: most ML students never touch hardware, and most hardware students never train models — <strong>I'm building both.</strong></p>
+    <p>Away from the bench: football, chess, drawing (black-and-white ink, cross-hatching — this page's look is no accident), and reading through Wikipedia's Vital Articles one entry at a time.</p>
+  </section>
+
+  <section id="contact">
+    <h2 class="panel-title">Contact</h2>
+    <div class="contact-row">
+      <a class="btn primary" href="mailto:YOUR_EMAIL_HERE">Email me</a>
+      <a class="btn" href="https://github.com/YOUR_GITHUB_USERNAME">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kelvin Akinbiola</span>
+    <span>Hand-built · no framework · one HTML file</span>
+  </div>
+</footer>
+
+</body>
+</html>
